@@ -30,24 +30,6 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin-bottom: 20px;
-    animation: contentFadeIn 1.2s 0s cubic-bezier(0, 0, 0.2, 1) forwards;
-}
-
-@keyframes contentFadeIn {
-    0% {
-        transform: translateY(2.5em);
-        opacity: 0
-    }
-
-    35% {
-        transform: translateY(2.5em);
-        opacity: 0
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1
-    }
 }
 
 .article-title {
