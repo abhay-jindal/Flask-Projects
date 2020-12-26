@@ -1,28 +1,41 @@
 ﻿body {
     background: #fafafa;
-    color: #333333;
     margin-top: 5rem;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    color: #444444;
+    color: rgba(8, 8, 8, 1);
+    font-family: Times New Roman;
 }
 
 .bg-steel {
-    background-color: #5f788a;
+    background-color: black;
 }
 
+#content {
+    overflow: hidden;
+    min-height: 30%;
+}
+
+.btn-outline-info {
+    color: white;
+    background-color: #007c89;
+    font-family: Graphik Web;
+}
+
+.border-bottom, .form-control-label{
+    color: #241c15;
+    font-family: Georgia;
+    font-weight: 400;
+}
 .site-header .navbar-nav .nav-link {
     color: #cbd5db;
 }
 
-    .site-header .navbar-nav .nav-link:hover {
-        color: #ffffff;
-    }
+.site-header .navbar-nav .nav-link:hover {
+    color: #ffc017;
+}
 
-    .site-header .navbar-nav .nav-link.active {
-        font-weight: 500;
-    }
 
 .content-section {
     background: #ffffff;
@@ -33,7 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .article-title {
-    color: #444444;
+    color: #024d55;
 }
 
 a.article-title:hover {
@@ -50,6 +63,7 @@ a.article-title:hover {
     width: 65px;
     margin-right: 16px;
 }
+
 
 .article-metadata {
     padding-bottom: 1px;
