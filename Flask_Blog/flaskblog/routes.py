@@ -17,12 +17,12 @@ def home():
 def about():
     return render_template('about.html', title='About')
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/register")
 def register():
     form = RegistrationForm()
     return render_template('register.html', title='Register', form=form)
 
-@app.route("/login", methods=['GET'])
+@app.route("/login")
 def login():
     form = LoginForm()
     return render_template('login.html', title='Login', form=form)
@@ -71,7 +71,7 @@ def account(account_id):
         form.username.data = user.username
         form.email.data = user.email
     image_file = url_for('static', filename='profile_pics/' + user.image_file)
-    return render_template('account.html', title=user.username, image_file=image_file, form=form, account=user)
+    return render_template('account.html', title="Account", image_file=image_file, form=form, account=user)
 
 @app.route("/post/new", methods=['GET', 'POST'])
 @login_required
@@ -126,14 +126,13 @@ def _validate_user():
     if user and bcrypt.check_password_hash(user.password, request.form['password']):
         login_user(user, remember=request.form['remember'])
         return jsonify({'response': True, "redirect": "/home"})
-    flash('Login Unsuccessful. Please check email and password!', 'danger')
     return jsonify({'response': False})
 
 @app.route("/V1/register/account", methods=['POST'])
 def _register_user():
     user = User.query.filter_by(email=request.form['email']).first()
     if user:
-        return jsonify({'response': False, "text": "Email already registered. Choose another email!"})
+        return jsonify({'response': False, "error": "Email already registered. Choose another email!"})
     else:
         hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
         user = User(username=request.form['username'], email=request.form['email'], password=hashed_password)
@@ -141,3 +140,16 @@ def _register_user():
         db.session.commit()
         flash('Your account has been created! You are now able to log in.', 'success')
         return jsonify({'response': True, "redirect": "/login"})
+
+@app.route("/V1/update/account", methods=['POST'])
+def _update_user():
+    already_user = User.query.filter_by(email=request.form['email']).first()
+    if already_user and already_user.username == request.form['username']:
+        return jsonify({'response': False, "error": "Email already registered. Choose another email!"})
+
+    user = User.query.filter_by(email=request.form['current_email']).first()
+    user.username = request.form['username']
+    user.email = request.form['email']
+    db.session.commit()
+    return jsonify({'response': True})
+

@@ -31,12 +31,12 @@
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link" href="{{ url_for('new_post') }}">New Post</a>
-                        <a class="nav-item nav-link" href="/account/{{ current_user.id }}">{{ current_user.username }}</a>
-                        <a class="nav-item nav-link" href="/logout">Logout</a>
+                            <a class="nav-item nav-link" href="{{ url_for('new_post') }}">New Post</a>
+                            <a id="nav-user" class="nav-item nav-link" href="/account/{{ current_user.id }}">{{ current_user.username }}</a>
+                            <a class="nav-item nav-link" href="/logout">Logout</a>
                         {% else %}
-                        <a class="nav-item nav-link" href="/login">Login</a>
-                        <a class="nav-item nav-link" href="/register">Register</a>
+                            <a class="nav-item nav-link" href="/login">Login</a>
+                            <a class="nav-item nav-link" href="/register">Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -48,14 +48,14 @@
             <div class="col-md-8">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                {% for category, message in messages %}
-                <div class="alert alert-{{ category }} fade show" role="alert">
-                    {{ message }}
-                    <button type="button" class="close" data-dismiss="alert">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                {% endfor %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{ category }} fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
                 {% endif %}
 
                 {% endwith %}
