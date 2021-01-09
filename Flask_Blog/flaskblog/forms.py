@@ -1,54 +1,45 @@
 from flask_wtf import FlaskForm
 from flask_wtf.file import FileField, FileAllowed
-from wtforms.fields.html5 import EmailField
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError, TextAreaField
-from wtforms.validators import DataRequired, Length, Email, EqualTo
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Length, ValidationError
 from flaskblog.models import User
-from flask_login import current_user
+
 
 class RegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField("Email", validators=[DataRequired(), Email()])
+    email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
-    confirm_password = PasswordField(" Confirm Password", validators=[DataRequired(), EqualTo("password")])
+    confirm_password = PasswordField(" Confirm Password", validators=[DataRequired()])
     submit = SubmitField("Create Account")
 
-    def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
-        if user:
-            raise ValidationError("Username already taken. Choose different username!")
-
-    def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
-        if user:
-            raise ValidationError("Email already registered. Choose another email!")
-
 class LoginForm(FlaskForm):
-    email = StringField("Email", validators=[DataRequired(), Email()])
+    email = StringField("Email", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
     remember = BooleanField('Remember me')
     submit = SubmitField("Log in")
 
 class UpdateAccountForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired(), Length(min=2, max=20)])
-    email = StringField("Email", validators=[DataRequired(), Email()])
+    email = StringField("Email", validators=[DataRequired()])
     picture = FileField("Update Profile Picture", validators=[FileAllowed(['png', 'jpg', "jpeg", "gif"])])
     submit = SubmitField("Update")
-
-    def validate_username(self, username):
-        if current_user.username != username.data:
-            user = User.query.filter_by(username=username.data).first()
-            if user:
-                raise ValidationError("Username already taken. Choose different username!")
-
-    def validate_email(self, email):
-        if current_user.email != email.data:
-            user = User.query.filter_by(email=email.data).first()
-            if user:
-                raise ValidationError("Email already registered. Choose another email!")
 
 class PostForm(FlaskForm):
     title = StringField("Title", validators=[DataRequired()])
     content = TextAreaField("Content", validators=[DataRequired()])
     submit = SubmitField("Publish")
 
+class SpotifyForm(FlaskForm):
+    link = StringField("Playlist URI", validators=[DataRequired()])
+    category = SelectField('Category', choices = [('playlist', 'Playlist'), ('artist', 'Artist'), ('album', 'Album')])
+    submit = SubmitField("Download Tracks")
+
+
+class RequestResetForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    submit = SubmitField('Request Password Reset')
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField('Password', validators=[DataRequired()])
+    confirm_password = PasswordField('Confirm Password',validators=[DataRequired()])
+    submit = SubmitField('Reset Password')

@@ -13,12 +13,6 @@
         {% if post.author == current_user %}
         <div style="float:right;">
             <a class="btn btn-secondary btn-sm mt-3 mb-1" href={{ url_for('update_post', post_id=post.id) }}>Update</a>
-            <button type="button" class="btn btn-primary mt-3 btn-sm m-1 dropdown-toggle" data-target="id1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Translate</button>
-            <div class="dropdown-menu" aria-labelledby="id1">
-                <button class="dropdown-item" type="button">Action</button>
-                <button class="dropdown-item" type="button">Another action</button>
-                <button class="dropdown-item" type="button">Something else here</button>
-            </div>
             <button type="button" class="btn btn-danger mt-3 btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
         </div>
         {% endif %}

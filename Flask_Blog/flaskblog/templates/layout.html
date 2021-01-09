@@ -8,11 +8,12 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='image.scss') }}">
 
     {% if title %}
-        <title>Flask Blog - {{ title }}</title>
+    <title>Flask Blog - {{ title }}</title>
     {% else %}
-        <title>Flask Blog</title>
+    <title>Flask Blog</title>
     {% endif %}
 </head>
 <body>
@@ -20,13 +21,13 @@
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
             <div class="container">
                 <a class="navbar-brand mr-4" href="/">Flask Blog</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
                         <a class="nav-item nav-link" href="/">Home</a>
-                        <a class="nav-item nav-link" href="/about">About</a>
+                        <a class="nav-item nav-link" href="/spotify">Spotify</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
@@ -61,7 +62,8 @@
                 {% endwith %}
                 {% block content %}{% endblock content %}
             </div>
-            <div class="col-md-4">
+
+            <div id="sidebar" class="col-md-4">
                 <div class="content-section">
                     <h3>Our Sidebar</h3>
                     <p class='text-muted'>

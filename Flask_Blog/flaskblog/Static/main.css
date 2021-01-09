@@ -17,10 +17,10 @@ h1, h2, h3, h4, h5, h6 {
     min-height: 30%;
 }
 
-.btn-outline-info {
-    color: white;
-    background-color: #007c89;
-    font-family: Graphik Web;
+.btn {
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .border-bottom, .form-control-label{
@@ -58,12 +58,22 @@ a.article-title:hover {
     white-space: pre-line;
 }
 
+.account-img:hover {
+    opacity: 0.5;
+    display: block;
+    cursor: pointer;
+}
+
 .article-img {
     height: 65px;
     width: 65px;
     margin-right: 16px;
 }
 
+#picture {
+    position: absolute;
+    top: -1000px;
+}
 
 .article-metadata {
     padding-bottom: 1px;

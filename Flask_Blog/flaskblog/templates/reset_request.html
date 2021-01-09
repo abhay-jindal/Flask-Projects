@@ -1,0 +1,40 @@
+﻿{% extends "layout.html" %}
+{% block content %}
+<div id="show-error" role="alert"></div>
+<div class="content-section">
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <fieldset class="form-group">
+            <legend class="border-bottom mb-4">Reset Password</legend>
+            <div class="form-group">
+                
+                {{ form.email(class="form-control", placeholder="Enter your email address", onchange="checkEmailValidity()") }}
+                <div id="email-feedback"></div>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            {{ form.submit(class="btn btn-success") }}
+        </div>
+    </form>
+</div>
+<small class="text-muted ml-2">
+    Enter your user account's verified email address and we will send you a password reset link.
+</small>
+{% endblock content %}
+{% block script %}
+    <script>
+        function checkEmailValidity() {
+            email = $('#email').val();
+            let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (re.test(email)) {
+                $('#email').removeClass("is-invalid");
+                $(".btn").prop('disabled', false);
+            } else {
+                $('#email').addClass("is-invalid");
+                $('#email-feedback').addClass("invalid-feedback").text('Invalid email address.');
+                $(".btn").prop('disabled', true);
+            }
+        }
+    </script>
+{% endblock script %}
