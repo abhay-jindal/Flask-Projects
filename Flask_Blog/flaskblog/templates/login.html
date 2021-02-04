@@ -1,11 +1,21 @@
 ﻿{% extends "layout.html" %}
 {% block content %}
-<div id="show-error" role="alert"></div>
+
     <div class="content-section">
         <form method="POST" action="">
             {{ form.hidden_tag() }}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Flask account log in</legend>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="alert alert alert-danger collapse" role="alert">
+                            Your email or password is incorrect. If you don’t remember your password, <a class="alert-link" href="{{ url_for('users.reset_request') }}">reset it now</a>.
+                            <p class="close">&times;</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     {{ form.email.label(class="form-control-label") }}
                     {{ form.email(class="form-control", onchange="checkEmailValidity()") }}
@@ -13,7 +23,7 @@
                 </div>
                 <div class="form-group">
                     {{ form.password.label(class="form-control-label") }}
-                    <a style="float:right; font-size: 12px; color: #0366d6; text-decoration: none;" href="{{ url_for('reset_request') }}"><b>Forgot password?</b></a>
+                    <a style="float:right; font-size: 12px; color: #0366d6; text-decoration: none;" href="{{ url_for('users.reset_request') }}"><b>Forgot password?</b></a>
                     {{ form.password(class="form-control") }}
 
                 </div>
@@ -28,12 +38,12 @@
             </div>
         </form>
     </div>
-    <div class="border-top pt-3">
-        <small class="text-muted">
-            Don't have an Flask Account? <a style="color: #0366d6; text-decoration: none;" href="{{ url_for('register') }}"><b>Create an account.</b></a>
-        </small>
-    </div>
+<div class="border-top pt-3">
+    <small class="text-muted">
+        Don't have an Flask Account? <a style="color: #0366d6; text-decoration: none;" href="{{ url_for('users.register') }}"><b>Create an account.</b></a>
+    </small>
+</div>
 {% endblock content %}
 {% block script %}
-    <script src="{{ url_for('static', filename='login.js') }}" crossorigin="anonymous"></script>
+<script src="{{ url_for('static', filename='login.js') }}" crossorigin="anonymous"></script>
 {% endblock script %}

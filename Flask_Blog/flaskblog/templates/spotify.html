@@ -21,10 +21,15 @@
 
     </form>
 </div>
+
 <small class="text-muted ml-2">
     Download Spotify playlist the easy way.
 </small>
 {% endblock %}
 {% block script %}
-    <script src="{{ url_for('static', filename='spotify.js') }}" crossorigin="anonymous"></script>
+    <script>
+        $('select').on('change', function () {
+            $('#link').attr("placeholder", "https://open.spotify.com/" + this.value);
+        });
+    </script>
 {% endblock script %}

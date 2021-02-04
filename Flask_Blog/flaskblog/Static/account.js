@@ -1,23 +1,4 @@
 
-function checkFileExtension() {
-    fileName = $('#picture').val();
-    extension = fileName.split('.').pop();
-    if (['png', 'jpg', "jpeg", "gif"].includes(extension)) {
-        $("#picture-error").text("");
-        $(".account-img").attr("src", fileName);
-        $('#picture').removeClass("is-invalid");
-    } else {
-        $("#picture-error").text("File does not have an approved extension: png, jpg, jpeg or gif.");
-        $('#picture').addClass("is-invalid");
-    }
-
-    if ($('.is-invalid').length == 0) {
-        $(".btn").prop('disabled', false);
-    } else {
-        $(".btn").prop('disabled', true);
-    }
-}
-
 function checkEmailValidity() {
     email = $('#email').val();
     let re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -34,11 +15,51 @@ function checkEmailValidity() {
     }
 }
 
-$('.account-img').on('click', function (e) {
-    $('#picture').click();
+$('#picture').on('change', function (event) {
+    const file = this.files[0]
+    if (file) {
+        const extension = file.type;
+
+        if (['image/png', 'image/jpg', "image/jpeg", "image/gif"].includes(extension)) {
+            $("#picture-error").text("");
+            $('#picture').removeClass("is-invalid");
+
+            const reader = new FileReader();
+            reader.onload = function () {
+                $('.account-img').attr('src', this.result);
+            }
+
+            reader.readAsDataURL(file); // convert to base64 string
+
+        } else {
+            $("#picture-error").text("File does not have an approved extension: png, jpg, jpeg or gif.");
+            $('#picture').addClass("is-invalid");
+        }
+    }
+
+    $("#picture").change(function () {
+        readURL(this);
+    });
+
+
+    if ($('.is-invalid').length == 0) {
+        $(".btn").prop('disabled', false);
+    } else {
+        $(".btn").prop('disabled', true);
+    }
 });
 
+
 $(document).ready(function () {
+
+    $('.image-text').on('click', function (e) {
+        $('#picture').click();
+    });
+
+    $('.close').on('click', function (e) {
+        $('.alert').addClass('collapse');
+    });
+
     $('form').on('submit', function (event) {
         event.preventDefault();
         var email = $('#email').val();
@@ -56,7 +77,8 @@ $(document).ready(function () {
                 contentType: false,
                 processData: false,
             }).done(function (data) {
-                if (data.response) { 
+                if (data.response) {
+                    $(".alert").removeClass("collapse");
                     $(".text-secondary").text(email);
                     if (data.image) {
                         $(".account-img").attr("src", data.image);

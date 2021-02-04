@@ -36,6 +36,22 @@ h1, h2, h3, h4, h5, h6 {
     color: #ffc017;
 }
 
+.image-text {
+    position: absolute;
+    background-color: rgba(255,255,255,0.8);
+    width: 125px;
+    height: 125px;
+    line-height: 135px;
+    text-align: center;
+    z-index: 10;
+    opacity: 0;
+    transition: all .5s ease;
+    cursor: pointer;
+}
+
+.image-text:hover {
+    opacity: 1;
+}
 
 .content-section {
     background: #ffffff;
@@ -102,4 +118,4 @@ a.article-title:hover {
 .account-heading {
     font-size: 2.5rem;
 }
-     
+    

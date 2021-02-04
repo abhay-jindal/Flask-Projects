@@ -33,6 +33,11 @@ function checkConfirmPassword() {
 }
 
 $(document).ready(function () {
+
+    $('.close').on('click', function (e) {
+        $('.alert').addClass('collapse');
+    });
+
     $('form').on('submit', function (event) {
         event.preventDefault();
         
@@ -61,6 +66,8 @@ $(document).ready(function () {
                     $('#email').addClass("is-invalid");
                     $('#email-feedback').addClass("invalid-feedback").text(data.error);
                     $(".btn").prop('disabled', true);
+                } else {
+                    $(".alert").removeClass("collapse");
                 }
             });
         }

@@ -8,8 +8,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='image.scss') }}">
-
     {% if title %}
     <title>Flask Blog - {{ title }}</title>
     {% else %}
@@ -26,18 +24,19 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href="/">Home</a>
-                        <a class="nav-item nav-link" href="/spotify">Spotify</a>
+                        <a class="nav-item nav-link" href={{ url_for('main.home') }}>Home</a>
+                        <a class="nav-item nav-link" href={{ url_for('main.spotify') }}>Spotify</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
                         {% if current_user.is_authenticated %}
-                            <a class="nav-item nav-link" href="{{ url_for('new_post') }}">New Post</a>
-                            <a id="nav-user" class="nav-item nav-link" href="/account/{{ current_user.id }}">{{ current_user.username }}</a>
-                            <a class="nav-item nav-link" href="/logout">Logout</a>
+                        <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Sell Books</a>
+                        <a class="nav-item nav-link" href={{ url_for('posts.new_post') }}>New Post</a>
+                        <a id="nav-user" class="nav-item nav-link" href={{ url_for('users.account', account_id=current_user.id) }}>{{ current_user.username }}</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.logout') }}>Logout</a>
                         {% else %}
-                            <a class="nav-item nav-link" href="/login">Login</a>
-                            <a class="nav-item nav-link" href="/register">Register</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
                         {% endif %}
                     </div>
                 </div>
@@ -52,9 +51,7 @@
                     {% for category, message in messages %}
                         <div class="alert alert-{{ category }} fade show" role="alert">
                             {{ message }}
-                            <button type="button" class="close" data-dismiss="alert">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                            <p class="close" data-dismiss="alert">&times;</p>
                         </div>
                     {% endfor %}
                 {% endif %}
@@ -82,7 +79,6 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
     {% block script %} {% endblock script %}
