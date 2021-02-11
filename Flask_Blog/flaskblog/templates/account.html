@@ -3,48 +3,23 @@
 <div class="content-section">
     <div class="media">
         <img class="rounded-circle account-img" src={{ image_file }}>
-        <h6 class="image-text">Edit Image</h6>
         <div class="media-body">
-            <h2 class="account-heading">{{ account.username }}</h2>
-            <p class="text-secondary">{{ account.email }}</p>
-            <small class="text-muted">Member since {{ account.member_since.strftime('%d-%B') }}</small>
+            <h4 class="account-heading">{{ account.username }}</h4>
+            <small class="text-secondary">{{ account.email }}</small>
         </div>
     </div>
-    <div class="text-danger mt-1"><small id="picture-error"></small></div>
-    {% if current_user == account %}
-    <form method="post" action="" enctype="multipart/form-data">
-        {{ form.hidden_tag() }}
+</div>
 
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Account Info</legend>
-            <div class="form-group">
-                {{ form.username.label(class='form-control-label') }}
-                {{ form.username(class="form-control") }}
-            </div>
-            <div class="form-group">
-                {{ form.email.label(class='form-control-label') }}
-                {{ form.email(class="form-control", onchange="checkEmailValidity()") }}
-                <div id="email-feedback"></div>
-            </div>
-            <div class="form-group">
-                {{ form.picture(class="form-control-file") }}
-            </div>
-        </fieldset>
-        <div class="form-group">
-            {{ form.submit(class='btn btn-success')}}
+{% for post in account.posts %}
+<article style="border-radius:10px;" class="media content-section mt-3">
+    <div class="media-body">
+        <div class="article-metadata">
+            <small class="text-muted">Posted on  {{ post.date_posted.strftime('%B %d') }}</small>
         </div>
-    </form>
-    {% endif %}
-<div class="row">
-    <div class="col">
-        <div class="alert alert alert-success collapse" role="alert">
-            Changes to your profile have been saved.
-            <p class="close">&times;</p>
-        </div>
+        <h5><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h5>   
     </div>
-</div>
-</div>
+</article>
+{% endfor %}
+
     {% endblock content %}
-    {% block script %}
-<script src="{{ url_for('static', filename='account.js') }}" crossorigin="anonymous"></script>
-    {% endblock script %}
+

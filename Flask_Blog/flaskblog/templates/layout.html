@@ -18,28 +18,35 @@
     <header class="site-header">
         <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
             <div class="container">
-                <a class="navbar-brand mr-4" href="/">Flask Blog</a>
+                <a class="navbar-brand mr-4" href="/"><img style="height:30px; width:30px" src="https://uploads-ssl.webflow.com/5f8f0e87105f88726b75563b/5f96fec95b5e55c14a37fca7_logo-large.png"></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarToggle">
                     <div class="navbar-nav mr-auto">
-                        <a class="nav-item nav-link" href={{ url_for('main.home') }}>Home</a>
                         <a class="nav-item nav-link" href={{ url_for('main.spotify') }}>Spotify</a>
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
+                        <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Download Books</a>
                         {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Sell Books</a>
-                        <a class="nav-item nav-link" href={{ url_for('posts.new_post') }}>New Post</a>
-                        <a id="nav-user" class="nav-item nav-link" href={{ url_for('users.account', account_id=current_user.id) }}>{{ current_user.username }}</a>
-                        <a class="nav-item nav-link" href={{ url_for('users.logout') }}>Logout</a>
+                            <div class="dropdown">
+                                <a style="cursor: pointer;" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
+                                <ul class="dropdown-menu">
+                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.account', account_id=current_user.id) }}>Account</a></li>
+                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.edit_account', account_id=current_user.id) }}>Edit profile</a></li>        
+                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.logout') }}>Log Out</a></li>
+                                </ul>
+                            </div>
+
                         {% else %}
-                        <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
-                        <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
+                            <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
+                            <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
                         {% endif %}
                     </div>
-                </div>
+                    </div>
+
+               
             </div>
         </nav>
     </header>
@@ -62,14 +69,16 @@
 
             <div id="sidebar" class="col-md-4">
                 <div class="content-section">
-                    <h3>Our Sidebar</h3>
-                    <p class='text-muted'>
-                        You can put any information here you'd like.
+                    <h3>Notification Sidebar</h3>
+                    <p class='text-muted'> 
+                         Notifications, set reminders and latest announcements will be published here!
                         <ul class="list-group">
-                            <li class="list-group-item list-group-item-light">Latest Posts</li>
-                            <li class="list-group-item list-group-item-light">Announcements</li>
-                            <li class="list-group-item list-group-item-light">Calendars</li>
-                            <li class="list-group-item list-group-item-light">etc</li>
+                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="#">Latest Posts</a></li>
+
+                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="{{ url_for('reminder.set_reminder') }}">Set Reminders</a></li>
+                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="#">Announcements</a></li>
+
+
                         </ul>
                     </p>
                 </div>

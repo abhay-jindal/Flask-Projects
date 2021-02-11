@@ -16,7 +16,7 @@
     </form>
 </div>
 
-<div class="content-section" id="book_form">
+<div style="display:none;" class="content-section" id="book_form">
     <fieldset>
         <legend style="text-align:center;" id="legend" class="border-bottom"></legend>
         <div class="form-group">
@@ -30,20 +30,12 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="form-row">
-                <div class="col-md-6">
-                    <label class="form-control-label" for="categories">Categories</label>
-                    <input type="text" class="form-control" id="categories" required>
-                </div>
-                <div class="col-md-6">
-                    <label for="date">Published Date</label>
-                    <input type="text" class="form-control" id="date" required>
-                </div>
-            </div>
+            <small><a class="alert-link" style="text-decoration-style: solid;" href="" target="_blank">Checkout this book's reviews!</a></small>
         </div>
     </fieldset>
-    <button class="btn btn-success" type="submit">Sell This Book</button>
+    <button class="btn btn-success download" type="submit">Download Book</button>
 </div>
+<span style="display:none;" id="span"></span>
 {% endblock %}
 {% block script %}
 <script>
@@ -56,25 +48,34 @@
                 return response.json();
             })
             .then(function (result) {
-                try {
-                    $('#isbn').removeClass("is-invalid");
-                    result = result.items[0].volumeInfo;
+                $('#isbn').removeClass("is-invalid");
+                result = result.items[0].volumeInfo;
+                const title = result.title;
 
-                    $('#title').val(result.title);
-                    $('#authors').val(result.authors);
-                    $('#categories').val(result.categories);
-                    $('#date').val(result.publishedDate);
-                    $('#description').text(result.description);
-                    $('#legend').text(result.title + " by " + result.authors);
-                    $(".img-thumbnail").attr("src", result.imageLinks.smallThumbnail);
+                $('#description').text(result.description);
+                $('#span').text(title);
+                $('#legend').text(title + " by " + result.authors);
 
-                    $("#book_form").show();
-                } catch (error) {
-                    $("#book_form").hide();
-                    $('#isbn').addClass("is-invalid");
-                    $('#isbn-feedback').addClass("invalid-feedback").text('Invalid ISBN code.');
-                }
-            })
+                const convert = title.replace(/\s/g, "-").toLowerCase() + "-books.html";
+                console.log(convert);
+                $(".img-thumbnail").attr("src", result.imageLinks.smallThumbnail);
+                $(".alert-link").attr("href", result.infoLink);
+
+                $("#book_form").show();
+            }).catch(function (error) {
+                $("#book_form").hide();
+                $('#isbn').addClass("is-invalid");
+                $('#isbn-feedback').addClass("invalid-feedback").text('Invalid ISBN code.');
+            });
+    });
+
+    $(".download").on('click', function (event) {
+        event.preventDefault;
+        const title = $("#span").text()
+        const convert = title.replace(/\s/g, "-").toLowerCase();
+ 
+        window.open("https://www.pdfdrive.com/" + convert +"-books.html", "_blank");
+
     });
 </script>
 {% endblock script %}

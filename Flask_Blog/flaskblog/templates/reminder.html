@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Reminder!</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+</head>
+
+<body>
+    <div>
+        <nav class="black">   
+            <a href="#!" class="brand-logo center">Reminder!</a>             
+        </nav>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <h4>Welcome to Reminder!</h4>
+            <p>
+                Reminder! helps you set reminders or send messages to your future self with ease and convenience. All you have to
+                do is fill in your details below and choose the duration after which the message will be sent.
+            </p>
+        </div>
+
+        <div class="row">
+            <form class="col s12" method="POST">
+                {{ form.hidden_tag() }}
+                <div class="row">
+                    <div class="input-field col s6">
+                        {{ form.first_name(class="validate", autocomplete="off") }}
+                        {{ form.first_name.label() }}
+                    </div>
+                    <div class="input-field col s6">
+                        {{ form.last_name(class="validate", autocomplete="off") }}
+                        {{ form.last_name.label() }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+                        {{ form.message(class="materialize-textarea") }}
+                        {{ form.message.label() }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12">
+
+                        {{ form.email(class="validate", autocomplete="off") }}
+                        {{ form.email.label() }}
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6">
+                        {{ form.reminder_date() }}
+                        {{ form.reminder_date.label() }}
+
+                    </div>
+                    <div class="input-field col s6">
+                        {{ form.reminder_time() }}
+                        {{ form.reminder_time.label() }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    {{ form.submit(class="btn") }}
+                </div>
+
+            
+               
+            </form>
+        </div>
+
+    </div>
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+ 
+</body>
+</html>

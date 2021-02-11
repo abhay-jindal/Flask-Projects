@@ -18,19 +18,14 @@ function checkEmailValidity() {
 $('#picture').on('change', function (event) {
     const file = this.files[0]
     if (file) {
-        const extension = file.type;
-
-        if (['image/png', 'image/jpg', "image/jpeg", "image/gif"].includes(extension)) {
+        if (['image/png', 'image/jpg', "image/jpeg", "image/gif"].includes(file.type)) {
             $("#picture-error").text("");
             $('#picture').removeClass("is-invalid");
-
             const reader = new FileReader();
             reader.onload = function () {
                 $('.account-img').attr('src', this.result);
             }
-
             reader.readAsDataURL(file); // convert to base64 string
-
         } else {
             $("#picture-error").text("File does not have an approved extension: png, jpg, jpeg or gif.");
             $('#picture').addClass("is-invalid");
@@ -40,7 +35,6 @@ $('#picture').on('change', function (event) {
     $("#picture").change(function () {
         readURL(this);
     });
-
 
     if ($('.is-invalid').length == 0) {
         $(".btn").prop('disabled', false);

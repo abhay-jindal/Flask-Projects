@@ -1,19 +1,23 @@
 from flask import render_template, url_for, flash, redirect, request, Blueprint, jsonify
 from flask_login import login_user, current_user, logout_user, login_required
-from flaskblog import db, bcrypt
-from flaskblog.models import User
+from flaskblog import db
+from flaskblog.models import User, Post
 from flaskblog.users.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
-from flaskblog.users.utils import save_picture, send_reset_email
+from flaskblog.users.utils import save_picture, send_reset_email, picture_path_exists, save_default_picture
 
 users = Blueprint('users', __name__)
 
-@users.route("/register")
+@users.route("/register/")
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = RegistrationForm()
     return render_template('register.html', title='Register', form=form)
 
-@users.route("/login")
+@users.route("/login/")
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = LoginForm()
     return render_template('login.html', title='Login', form=form)
 
@@ -22,18 +26,33 @@ def logout():
     logout_user()
     return redirect(url_for("users.login"))
 
-@users.route("/account/<int:account_id>", methods=['GET'])
+@users.route("/edit-account/<int:account_id>/", methods=['GET'])
 @login_required
-def account(account_id):
+def edit_account(account_id):
     form = UpdateAccountForm()
-    user = User.query.get_or_404(account_id)
     if request.method == 'GET':
         form.username.data = current_user.username
         form.email.data = current_user.email
-    image_file = url_for('static', filename='profile_pics/' + user.image_file)
-    return render_template('account.html', title="Account", image_file=image_file, form=form, account=user)
 
-@users.route("/reset_password", methods=['GET', 'POST'])
+    user = User.query.get_or_404(account_id)
+    image_file = url_for('static', filename='profile_pics/' + user.image_file)
+    path_exists = picture_path_exists(image_file)
+    if not path_exists:
+        user.image_file = save_default_picture()
+        db.session.add(user)
+        db.session.commit()
+
+    return render_template('edit_account.html', title="Edit Account", image_file=image_file, form=form, account=user)
+
+
+@users.route("/account/<int:account_id>/", methods=['GET'])
+@login_required
+def account(account_id):
+    user = User.query.get_or_404(account_id)
+    image_file = url_for('static', filename='profile_pics/' + user.image_file)
+    return render_template('account.html', title="Account", image_file=image_file, account=user)
+
+@users.route("/reset-password/", methods=['GET', 'POST'])
 def reset_request():
     if current_user.is_authenticated:
          return redirect(url_for('main.home'))
@@ -49,7 +68,7 @@ def reset_request():
             return redirect(url_for('users.reset_request'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
-@users.route("/reset_password/<token>", methods=['GET', 'POST'])
+@users.route("/reset-password/<token>/", methods=['GET', 'POST'])
 def reset_token(token):
     if current_user.is_authenticated:
          return redirect(url_for('main.home'))
@@ -71,7 +90,7 @@ def reset_token(token):
 @users.route("/V1/validate/account", methods=['POST'])
 def _validate_user():
     user = User.query.filter_by(email=request.form['email']).first()
-    if user and bcrypt.check_password_hash(user.password, request.form['password']):
+    if user and user.check_password(request.form['password']):
         remember = request.form.get('remember', False)
         login_user(user, remember=remember)
         return jsonify({'response': True, "redirect": "/home"})
@@ -84,8 +103,8 @@ def _register_user():
     if user:
         return jsonify({'response': False, "error": "Email already registered. Choose another email!"})
     else:
-        hashed_password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
-        user = User(username=request.form['username'], email=email, password=hashed_password)
+        user = User(username=request.form['username'], email=email)
+        user.set_password(request.form['password'])
         db.session.add(user)
         db.session.commit()
         flash('Your account has been created! You are now able to log in.', 'success')
