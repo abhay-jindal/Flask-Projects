@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿
 <html>
 <head>
     <!-- Required meta tags -->
@@ -7,6 +7,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
     {% if title %}
     <title>Flask Blog - {{ title }}</title>
@@ -30,23 +31,23 @@
                     <div class="navbar-nav">
                         <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Download Books</a>
                         {% if current_user.is_authenticated %}
-                            <div class="dropdown">
-                                <a style="cursor: pointer;" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
-                                <ul class="dropdown-menu">
-                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.account', account_id=current_user.id) }}>Account</a></li>
-                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.edit_account', account_id=current_user.id) }}>Edit profile</a></li>        
-                                    <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.logout') }}>Log Out</a></li>
-                                </ul>
-                            </div>
+                        <div class="dropdown">
+                            <a style="cursor: pointer;" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
+                            <ul class="dropdown-menu">
+                                <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.account', account_id=current_user.id) }}>Account</a></li>
+                                <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.edit_account', account_id=current_user.id) }}>Edit profile</a></li>
+                                <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.logout') }}>Log Out</a></li>
+                            </ul>
+                        </div>
 
                         {% else %}
-                            <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
-                            <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
                         {% endif %}
                     </div>
-                    </div>
+                </div>
 
-               
+
             </div>
         </nav>
     </header>
@@ -55,12 +56,12 @@
             <div class="col-md-8">
                 {% with messages = get_flashed_messages(with_categories=true) %}
                 {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{ category }} fade show" role="alert">
-                            {{ message }}
-                            <p class="close" data-dismiss="alert">&times;</p>
-                        </div>
-                    {% endfor %}
+                {% for category, message in messages %}
+                <div class="alert alert-{{ category }} fade show" role="alert">
+                    {{ message }}
+                    <p class="close" data-dismiss="alert">&times;</p>
+                </div>
+                {% endfor %}
                 {% endif %}
 
                 {% endwith %}
@@ -70,8 +71,8 @@
             <div id="sidebar" class="col-md-4">
                 <div class="content-section">
                     <h3>Notification Sidebar</h3>
-                    <p class='text-muted'> 
-                         Notifications, set reminders and latest announcements will be published here!
+                    <p class='text-muted'>
+                        Notifications, set reminders and latest announcements will be published here!
                         <ul class="list-group">
                             <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="#">Latest Posts</a></li>
 
@@ -89,7 +90,9 @@
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    
     {% block script %} {% endblock script %}
 </body>
 </html>

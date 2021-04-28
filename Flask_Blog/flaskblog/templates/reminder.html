@@ -8,7 +8,7 @@
 <body>
     <div>
         <nav class="black">   
-            <a href="#!" class="brand-logo center">Reminder!</a>             
+            <a href={{ url_for('main.home') }} class="brand-logo center">Reminder!</a>             
         </nav>
     </div>
 
@@ -26,39 +26,39 @@
                 {{ form.hidden_tag() }}
                 <div class="row">
                     <div class="input-field col s6">
-                        {{ form.first_name(class="validate", autocomplete="off") }}
-                        {{ form.first_name.label() }}
+                        {{ form.first_name(class="validate form-control", autocomplete="off") }}
+                        {{ form.first_name.label(class="form-control-label") }}
                     </div>
                     <div class="input-field col s6">
-                        {{ form.last_name(class="validate", autocomplete="off") }}
-                        {{ form.last_name.label() }}
+                        {{ form.last_name(class="validate form-control", autocomplete="off") }}
+                        {{ form.last_name.label(class="form-control-label") }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
-                        {{ form.message(class="materialize-textarea") }}
-                        {{ form.message.label() }}
+                        {{ form.message(class="materialize-textarea form-control") }}
+                        {{ form.message.label(class="form-control-label") }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s12">
 
-                        {{ form.email(class="validate", autocomplete="off") }}
-                        {{ form.email.label() }}
+                        {{ form.email(class="validate form-control", autocomplete="off") }}
+                        {{ form.email.label(class="form-control-label") }}
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="input-field col s6">
-                        {{ form.reminder_date() }}
-                        {{ form.reminder_date.label() }}
+                        {{ form.reminder_date(class="form-control") }}
+                        {{ form.reminder_date.label(class="form-control-label") }}
 
                     </div>
                     <div class="input-field col s6">
-                        {{ form.reminder_time() }}
-                        {{ form.reminder_time.label() }}
+                        {{ form.reminder_time(class="form-control") }}
+                        {{ form.reminder_time.label(class="form-control-label") }}
                     </div>
                 </div>
 

@@ -9,7 +9,7 @@
         </div>
 
         <h3 class="article-title">{{ post.title }}</h3>
-        <p class="article-content">{{ post.content }}</p>
+        <p class="article-content">{{ post.content | safe }}</p>
         {% if post.author == current_user %}
         <div style="float:right;">
             <a class="btn btn-info btn-sm" href={{ url_for('posts.update_post', post_id=post.id) }}>Update</a>

@@ -14,10 +14,11 @@
             <time class="text-muted"> {{ post.date_posted.strftime('%B %d') }}</time>
         </div>
         <h4><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h4>
-        <p class="article-content">{{ post.content }}</p>
     </div>
 </article>
     {% endfor %}
+
+
 
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}
