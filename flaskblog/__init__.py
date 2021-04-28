@@ -45,7 +45,7 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
-    app.wsgi_app = WhiteNoise(app.wsgi_app, root='flaskblog/static/')
+    app.wsgi_app = WhiteNoise(app.wsgi_app)
 
     from flaskblog.users.routes import users
     from flaskblog.posts.routes import posts
