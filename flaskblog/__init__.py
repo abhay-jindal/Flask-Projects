@@ -5,7 +5,6 @@ from flask_login import LoginManager
 from flask_mail import Mail
 from flaskblog.config import Config
 from celery import Celery
-from whitenoise import WhiteNoise
 
 
 def make_celery(app=None):
@@ -45,7 +44,6 @@ def create_app(config_class=Config):
     bcrypt.init_app(app)
     login_manager.init_app(app)
     mail.init_app(app)
-    app.wsgi_app = WhiteNoise(app.wsgi_app)
 
     from flaskblog.users.routes import users
     from flaskblog.posts.routes import posts
