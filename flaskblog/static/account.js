@@ -6,7 +6,7 @@ function checkEmailValidity() {
         $('#email').removeClass("is-invalid");
     } else {
         $('#email').addClass("is-invalid");
-        $('#email-feedback').addClass("invalid-feedback").text('Invalid email address.');
+        $('#email-feedback').addClass("invalid-feedback").text('Enter a valid email address.');
     }
     if ($('.is-invalid').length == 0) {
         $(".btn").prop('disabled', false);

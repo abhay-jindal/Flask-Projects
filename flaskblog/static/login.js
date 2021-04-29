@@ -6,7 +6,7 @@ function checkEmailValidity() {
         $('#email').removeClass("is-invalid");
     } else {
         $('#email').addClass("is-invalid");
-        $('#email-feedback').addClass("invalid-feedback").text('Invalid email address.');
+        $('#email-feedback').addClass("invalid-feedback").text('Enter a valid email address.');
     }
 
     if ($('.is-invalid').length == 0) {
@@ -19,7 +19,7 @@ function checkEmailValidity() {
 function checkConfirmPassword() {
     if ($("#password").val() != $("#confirm_password").val()) {
         $('#confirm_password').addClass("is-invalid");
-        $('#password-feedback').addClass("invalid-feedback").text('Field must be equal to password.');
+        $('#password-feedback').addClass("invalid-feedback").text('The passwords you entered do not match.');
     } else {
         $('#confirm_password').removeClass("is-invalid");
     }

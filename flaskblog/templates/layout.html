@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% if title %}
-    <title>Flask Blog - {{ title }}</title>
+    <title>BlogChef - {{ title }}</title>
     {% else %}
-    <title>Flask Blog</title>
+    <title>BlogChef</title>
     {% endif %}
 </head>
 <body>
@@ -28,7 +28,7 @@
                     </div>
                     <!-- Navbar Right Side -->
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Download Books</a>
+                        <a class="nav-item nav-link" href={{ url_for('books.get_isbn_info') }}>Books</a>
                         {% if current_user.is_authenticated %}
                         <div class="dropdown">
                             <a style="cursor: pointer;" class="nav-item nav-link dropdown-toggle" data-toggle="dropdown">{{ current_user.username }}</a>
@@ -40,7 +40,7 @@
                         </div>
 
                         {% else %}
-                        <a class="nav-item nav-link" href={{ url_for('users.login') }}>Login</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.login') }}>Sign In</a>
                         <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
                         {% endif %}
                     </div>
@@ -65,23 +65,6 @@
 
                 {% endwith %}
                 {% block content %}{% endblock content %}
-            </div>
-
-            <div id="sidebar" class="col-md-4">
-                <div class="content-section">
-                    <h3>Notification Sidebar</h3>
-                    <p class='text-muted'>
-                        Notifications, set reminders and latest announcements will be published here!
-                        <ul class="list-group">
-                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="#">Latest Posts</a></li>
-
-                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="{{ url_for('reminder.set_reminder') }}">Set Reminders</a></li>
-                            <li class="list-group-item list-group-item-light"><a style="color: darkgoldenrod; text-decoration:None;" href="#">Announcements</a></li>
-
-
-                        </ul>
-                    </p>
-                </div>
             </div>
         </div>
     </main>

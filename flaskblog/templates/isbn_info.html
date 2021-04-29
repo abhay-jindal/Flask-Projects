@@ -1,7 +1,15 @@
 ﻿<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section" id="isbn_form">
+<div class="mb-5" style="text-align: center;">
+    <img style="height:60px; width:60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Apple_Books_%28macOS%29.svg/768px-Apple_Books_%28macOS%29.svg.png"><br />
+    <p style="color: #666;">
+        The BlogChef Books is a single, beautiful destination for all the books you love, and the ones you’re about to. 
+        Browse the Book Store via ISBN, create your own books PDF collections and get to them easily at any time. 
+    </p>
+</div>
+
+<div id="isbn_form">
     <form action="">
         <div class="form-row">
             <div class="col">
@@ -9,10 +17,10 @@
                 <div id="isbn-feedback"></div>
             </div>
             <div class="form-group">
-                <button class="btn btn-success">Fetch Book</button>
+                <button class="auth-user btn">Continue</button>
             </div>
         </div>
-        <small>Please <strong>omit hyphens</strong> after entering ISBN. For more info on ISBNs <a target="_blank" href="https://www.morrispublishing.com/self-publishing/products/technical-details/bar-codes/">Learn more</a></small>
+        <small style="color: #666;">Please <strong>omit hyphens</strong> after entering ISBN. For more info on ISBNs <a target="_blank" href="https://www.morrispublishing.com/self-publishing/products/technical-details/bar-codes/">Learn more</a></small>
     </form>
 </div>
 
@@ -73,8 +81,8 @@
         event.preventDefault;
         const title = $("#span").text()
         const convert = title.replace(/\s/g, "-").toLowerCase();
- 
-        window.open("https://www.pdfdrive.com/" + convert +"-books.html", "_blank");
+
+        window.open("https://www.pdfdrive.com/" + convert + "-books.html", "_blank");
 
     });
 </script>
