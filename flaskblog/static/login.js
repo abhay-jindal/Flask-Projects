@@ -44,10 +44,10 @@ $(document).ready(function () {
         var title = document.title;
         var data = new FormData(this);
         switch (title) {
-            case "Flask Blog - Login":  
+            case "BlogChef - Login":  
                 ajaxCall(data, "/V1/validate/account");
                 break;
-            case "Flask Blog - Register":     
+            case "BlogChef - Register":     
                 ajaxCall(data, "/V1/register/account"); 
                 break;
             }
