@@ -8,7 +8,7 @@
             <h1 class="border-bottom mb-4">Please sign in.</h1>
             <div class="row">
                 <div class="col">
-                    <div class="alert alert alert-danger collapse" role="alert">
+                    <div style="text-align:center;" class="alert alert-danger collapse" role="alert">
                         Your account information was entered incorrectly.
                         <p class="close">&times;</p>
                     </div>
@@ -18,7 +18,7 @@
             <div class="form-group">
                 <h5>{{ form.email.label(class="form-control-label") }}</h5>
                 {{ form.email(class="form-control", onchange="checkEmailValidity()") }}
-                <div id="email-feedback"></div>
+            <div id="email-feedback"></div>
             </div>
             <div class="form-group">
                 <h5>{{ form.password.label(class="form-control-label") }}</h5>
@@ -36,13 +36,11 @@
         </div>
     </form>
 </div>
-
-<div class=" mb-2">
-  
-</div>
-
+<div class="mb-5">
 <a style="color: #06c;  line-height: 30px;" href="{{ url_for('users.reset_request') }}"><span aria-hidden="true">Forgot your BlogChef ID or password?</span></a><br/>
 <a style="color: #06c;" href="{{ url_for('users.register') }}"><span aria-hidden="true">Don't have an BlogChef ID? Create one now.</span></a>
+
+</div>
 {% endblock content %}
 {% block script %}
 <script src="{{ url_for('static', filename='login.js') }}" crossorigin="anonymous"></script>

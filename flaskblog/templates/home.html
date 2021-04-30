@@ -1,24 +1,36 @@
 ﻿{% extends "layout.html" %}
 {% block content %}
+
+    <div class="mb-5" style="text-align: center;">
+        <img style="height:80px; width:80px;" src="https://cdn-static-1.medium.com/sites/medium.com/creators/images/Creators_Spot1.svg"><br />
+        <h1>Set your ideas in motion.</h1><br />
+        <p style="color: #666;">
+            If you have a story to tell, knowledge to share, or a perspective to offer — welcome home. 
+            It’s easy and free to post your thinking on any topic, whether it’s a standalone piece, a blog, or a publication with other writers. 
+            And with tools that let you express yourself creatively, you’ll have the chance to plant a seed, or even start a movement.
+        </p>
+    </div>
+
  {% if current_user.is_authenticated %}
     <a href={{ url_for('posts.new_post') }}>
-        <button class="btn btn-light home_button mb-3" type="submit">What's on your mind?</button>
+        <button class="btn auth-user mb-5" type="submit">Get started</button>
     </a>
 {% endif %}
+<hr />
     {% for post in posts.items %}
-<article class="media content-section">
-    <img class="rounded-circle article-img mr-2" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
-    <div class="media-body">
-        <div class="article-metadata">
-            <a style="color:rgba(8, 8, 8, 1);" class="mr-2" href="{{ url_for('users.account', account_id=post.author.id) }}">{{ post.author.username}}</a><b>.</b>
-            <time class="text-muted"> {{ post.date_posted.strftime('%B %d') }}</time>
+<div class="mb-5" >
+    
+        <div>
+            <img class="rounded-circle article-img mr-2" src="{{ url_for('static', filename='profile_pics/' + post.author.image_file) }}">
+            <b>
+                <a style="color: rgba(8, 8, 8, 1);" class="mr-2" href="{{ url_for('users.account', account_id=post.author.id) }}">{{ post.author.username}}</a><b>.</b>
+                <time class="text-muted"> {{ post.date_posted.strftime('%B %d') }}</time>
+            </b>
         </div>
-        <h4><a class="article-title" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h4>
+        <h4><a style="font-size:22px; font-weight: 900; letter-spacing: 0px; color:#292929; text-decoration:none;" href="{{ url_for('posts.post', post_id=post.id) }}">{{ post.title }}</a></h4>
     </div>
-</article>
+
     {% endfor %}
-
-
 
     {% for page_num in posts.iter_pages(left_edge=1, right_edge=1, left_current=1, right_current=2) %}
       {% if page_num %}

@@ -1,9 +1,13 @@
 {
   "ExpandedNodes": [
     "",
+    "\\books",
     "\\main",
-    "\\templates"
+    "\\static",
+    "\\static\\css",
+    "\\templates",
+    "\\users"
   ],
-  "SelectedNode": "\\main\\routes.py",
+  "SelectedNode": "\\static\\login.js",
   "PreviewInSolutionExplorer": false
 }

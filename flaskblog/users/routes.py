@@ -35,7 +35,7 @@ def edit_account(account_id):
         form.email.data = current_user.email
 
     user = User.query.get_or_404(account_id)
-    image_file = url_for('static', filename='profile_pics/' + user.image_file)
+    image_file = user.image_file
     path_exists = picture_path_exists(image_file)
     if not path_exists:
         user.image_file = save_default_picture()

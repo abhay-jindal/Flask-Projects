@@ -1,6 +1,5 @@
 from flask import render_template, request, Blueprint
 from flaskblog.models import Post
-import json
 from flaskblog.main.forms import SpotifyForm
 from flask_login import login_required
 

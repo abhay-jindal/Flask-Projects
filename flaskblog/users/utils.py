@@ -7,7 +7,7 @@ from flaskblog import mail
 from flask_login import current_user
 
 def picture_path_exists(picture):
-    picture_path = os.path.join(current_app.root_path, "static\profile_pics", picture.split("/")[3])
+    picture_path = os.path.join(current_app.root_path, "static\profile_pics", picture)  
     if os.path.exists(picture_path):
         return True
     else:

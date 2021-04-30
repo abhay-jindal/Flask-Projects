@@ -3,9 +3,10 @@
 {% block content %}
 <div class="mb-5" style="text-align: center;">
     <img style="height:60px; width:60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Apple_Books_%28macOS%29.svg/768px-Apple_Books_%28macOS%29.svg.png"><br />
+    <h1>Your library, your way.</h1><br/>
     <p style="color: #666;">
-        The BlogChef Books is a single, beautiful destination for all the books you love, and the ones you’re about to. 
-        Browse the Book Store via ISBN, create your own books PDF collections and get to them easily at any time. 
+        The BlogChef Books is a single, beautiful destination for all the books you love, and the ones you’re about to.
+        Browse the Book Store via ISBN, create your own books PDF collections and get to them easily at any time.
     </p>
 </div>
 
@@ -24,24 +25,24 @@
     </form>
 </div>
 
-<div style="display:none;" class="content-section" id="book_form">
+<div class="content-section mt-4 mb-4" id="book_form">
     <fieldset>
         <legend style="text-align:center;" id="legend" class="border-bottom"></legend>
         <div class="form-group">
             <div class="form-row">
-                <div class="col-md-3">
-                    <img src="" alt="" class="img-thumbnail">
+                <div class="img-responsive center-block mx-auto">
+                    <img style="border:none;" src="" class="img-thumbnail">
                 </div>
                 <div class="col-md-9">
-                    <h6 id="description"></h6>
+                    <p style="color: #666;" id="description"></p>
                 </div>
             </div>
         </div>
-        <div class="form-group">
-            <small><a class="alert-link" style="text-decoration-style: solid;" href="" target="_blank">Checkout this book's reviews!</a></small>
+        <div class="form-group" style="text-align:center;">
+            <small><a class="alert-link" style="text-decoration-style: solid;" href="" target="_blank">Checkout the reviews &#62;</a></small>
         </div>
     </fieldset>
-    <button class="btn btn-success download" type="submit">Download Book</button>
+    <button class="btn auth-user download" type="submit">Continue to Download</button>
 </div>
 <span style="display:none;" id="span"></span>
 {% endblock %}
@@ -65,7 +66,6 @@
                 $('#legend').text(title + " by " + result.authors);
 
                 const convert = title.replace(/\s/g, "-").toLowerCase() + "-books.html";
-                console.log(convert);
                 $(".img-thumbnail").attr("src", result.imageLinks.smallThumbnail);
                 $(".alert-link").attr("href", result.infoLink);
 
