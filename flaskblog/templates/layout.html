@@ -9,9 +9,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% if title %}
-    <title>BlogChef - {{ title }}</title>
+        <title>BlogChef - {{ title }}</title>
     {% else %}
-    <title>BlogChef</title>
+        <title>BlogChef</title>
     {% endif %}
 </head>
 <body>
@@ -35,13 +35,13 @@
                             <ul class="dropdown-menu">
                                 <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.account', account_id=current_user.id) }}>Account</a></li>
                                 <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.edit_account', account_id=current_user.id) }}>Edit profile</a></li>
-                                <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.logout') }}>Log Out</a></li>
+                                <li role="presentation"><a class="nav-item nav-link" role="menuitem" href={{ url_for('users.logout') }}>Sign Out</a></li>
                             </ul>
                         </div>
 
                         {% else %}
                         <a class="nav-item nav-link" href={{ url_for('users.login') }}>Sign In</a>
-                        <a class="nav-item nav-link" href={{ url_for('users.register') }}>Register</a>
+                        <a class="nav-item nav-link" href={{ url_for('users.register') }}>Sign Up</a>
                         {% endif %}
                     </div>
                 </div>

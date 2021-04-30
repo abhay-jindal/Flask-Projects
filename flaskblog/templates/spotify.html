@@ -1,35 +1,33 @@
 ﻿<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
+
+<div class="mb-5" style="text-align: center;">
+    <img style="height:60px; width:60px;" src="https://cdn.freelogovectors.net/svg07/apple_music_logo.svg"><br/>
+    <h1>The music you love. On the go.</h1><br />
+    <p style="color: #666;">
+        Discover all the playlists you want to hear, download or share from Spotify.
+        The MusicChef allows you to download tracks on your device so that you can hear them
+        anytime, anywhere and without any interruption.<br/>
+        <b>Download Spotify playlists the easy way.</b>
+    </p>
+</div>
+
+<div>
     <form method="POST" action="">
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Spotify to Youtube Tracks</legend>
             <div class="form-row">
                 <div class="col">
-                    {{ form.link(class="form-control", placeholder="https://open.spotify.com/playlist") }}
+                    {{ form.link(class="form-control", placeholder="Enter your favourite spotify playlists URL.") }}
                 </div>
-                <div class="col">
-                    {{ form.category(class="form-control") }}
-                </div>
-            </div>
-        </fieldset>
         <div class="form-group">
             {{ form.submit(class="btn btn-success") }}
         </div>
-
+            </div>
+        </fieldset>
     </form>
 </div>
+<iframe style="background-color:darkcyan; margin-left:48.1%; border:none; border-radius:10px;" src="https://toquemp3.com/@api/button/mp3/MEg-oqI9qmw" width="20" height="20" scrolling="no"></iframe>
 
-<small class="text-muted ml-2">
-    Download Spotify playlist the easy way.
-</small>
 {% endblock %}
-{% block script %}
-    <script>
-        $('select').on('change', function () {
-            $('#link').attr("placeholder", "https://open.spotify.com/" + this.value);
-        });
-    </script>
-{% endblock script %}

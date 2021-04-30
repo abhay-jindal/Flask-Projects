@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 {% extends "layout.html" %}
 {% block content %}
+
 <div class="mb-5" style="text-align: center;">
     <img style="height:60px; width:60px;" src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/22/Apple_Books_%28macOS%29.svg/768px-Apple_Books_%28macOS%29.svg.png"><br />
     <h1>Your library, your way.</h1><br/>
@@ -21,7 +22,7 @@
                 <button class="auth-user btn">Continue</button>
             </div>
         </div>
-        <small style="color: #666;">Please <strong>omit hyphens</strong> after entering ISBN. For more info on ISBNs <a target="_blank" href="https://www.morrispublishing.com/self-publishing/products/technical-details/bar-codes/">Learn more</a></small>
+        <small style="color: #666;">Please <strong>omit hyphens</strong> after entering ISBN.</small>
     </form>
 </div>
 
@@ -66,7 +67,8 @@
                 $('#legend').text(title + " by " + result.authors);
 
                 const convert = title.replace(/\s/g, "-").toLowerCase() + "-books.html";
-                $(".img-thumbnail").attr("src", result.imageLinks.smallThumbnail);
+                console.log(result);
+                $(".img-thumbnail").attr("src", result.imageLinks.thumbnail);
                 $(".alert-link").attr("href", result.infoLink);
 
                 $("#book_form").show();
@@ -78,12 +80,9 @@
     });
 
     $(".download").on('click', function (event) {
-        event.preventDefault;
         const title = $("#span").text()
         const convert = title.replace(/\s/g, "-").toLowerCase();
-
         window.open("https://www.pdfdrive.com/" + convert + "-books.html", "_blank");
-
     });
 </script>
 {% endblock script %}

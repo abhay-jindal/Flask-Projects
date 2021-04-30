@@ -16,7 +16,7 @@ def picture_path_exists(picture):
 def save_default_picture():
     import shutil
 
-    default_picture = os.path.join(current_app.root_path, "static\profile_pics", "default.png")
+    default_picture = os.path.join(current_app.root_path, "static\profile_pics\default.png")
     file_name = secrets.token_hex(8) + ".png"
     new_picture = os.path.join(current_app.root_path, "static\profile_pics", file_name)
     shutil.copy(default_picture, new_picture)

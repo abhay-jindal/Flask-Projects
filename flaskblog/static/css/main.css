@@ -99,7 +99,6 @@ h4 {
 
 }
 
-
 .account-img {
     height: 125px;
     width: 125px;
@@ -115,6 +114,12 @@ h4 {
     position: absolute;
     top: -1000px;
 }
+ .btn-success {
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 99em;
+    border-color: none;
+ }
 
 
     

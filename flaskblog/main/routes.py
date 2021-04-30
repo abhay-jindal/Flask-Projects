@@ -13,7 +13,6 @@ def home():
     return render_template("home.html", posts=posts)
 
 @main.route("/spotify/")
-@login_required
 def spotify():
     form = SpotifyForm()
     return render_template('spotify.html', title="Spotify", form=form)
