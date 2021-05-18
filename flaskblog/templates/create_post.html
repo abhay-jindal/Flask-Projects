@@ -41,7 +41,7 @@
 {% endblock content %}
 
 {% block script %}
-<script type="text/javascript" src="{{ url_for('static', filename='tinymce/tinymce.min.js') }}"></script>
+<script src="https://cdn.tiny.cloud/1/cacxjrp0uuq5urv7zgxwwe4pocin3w1uw3xard815tym55xn/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
 <script type="text/javascript">
     tinymce.init({
         selector: '#content',
@@ -64,9 +64,5 @@
         height: "100%"
     });
 
-    $('form').on('submit', function (event) {
-        console.log(tinymce.get("#content").getContent());
-    });
-
-    </script>
+</script>
 {% endblock script %}
