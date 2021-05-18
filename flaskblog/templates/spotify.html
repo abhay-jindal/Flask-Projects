@@ -21,13 +21,11 @@
                 <div class="col">
                     {{ form.link(class="form-control", placeholder="Enter your favourite spotify playlists URL.") }}
                 </div>
-        <div class="form-group">
-            {{ form.submit(class="btn btn-success") }}
-        </div>
             </div>
         </fieldset>
+        <div class="form-group text-center">
+            {{ form.submit(class="btn", id="continue") }}
+        </div>
     </form>
 </div>
-<iframe style="background-color:darkcyan; margin-left:48.1%; border:none; border-radius:10px;" src="https://toquemp3.com/@api/button/mp3/MEg-oqI9qmw" width="20" height="20" scrolling="no"></iframe>
-
 {% endblock %}

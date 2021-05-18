@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\flaskblog",
+    "\\flaskblog\\main",
+    "\\flaskblog\\static",
+    "\\flaskblog\\static\\css",
+    "\\flaskblog\\templates",
+    "\\flaskblog\\users"
+  ],
+  "SelectedNode": "\\flaskblog\\templates\\isbn_info.html",
+  "PreviewInSolutionExplorer": false
+}
